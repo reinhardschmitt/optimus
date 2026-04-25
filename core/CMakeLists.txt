@@ -11,4 +11,7 @@ target_sources(core
     PRIVATE
         src/Core.cpp
         src/CoreFactory.cpp
+        src/HomeModule.cpp
+        src/SettingsModule.cpp
+        src/ConfigModule.cpp
 )

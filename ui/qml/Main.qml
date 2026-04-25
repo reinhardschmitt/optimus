@@ -9,29 +9,42 @@ ApplicationWindow {
     width: 800
     height: 600
 
-    // Empfängt das Navigator-Objekt aus C++
     required property Navigator nav
 
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
 
-        Row {
+        // Navigation Header
+        ToolBar {
             Layout.fillWidth: true
-            height: 50
-            Button { text: "Home"; onClicked: nav.navigateTo(Page.Home) }
-            Button { text: "Settings"; onClicked: nav.navigateTo(Page.Settings) }
+            RowLayout {
+                anchors.fill: parent
+                Button { 
+                    text: "Home"
+                    onClicked: nav.navigateTo(0) 
+                }
+                Button { 
+                    text: "Settings"
+                    onClicked: nav.navigateTo(1) 
+                }
+                Button { 
+                    text: "Config"
+                    onClicked: nav.navigateTo(2) 
+                }
+            }
         }
 
-        // Dummy Stack für Views
+        // Der View-Container
         StackLayout {
-            Layout.fillHeight: true
             Layout.fillWidth: true
+            Layout.fillHeight: true
             
-            currentIndex: nav.currentPage 
-            
-            Rectangle { color: "white"; Text { text: "Home View"; anchors.centerIn: parent } }
-            Rectangle { color: "lightgrey"; Text { text: "Settings View"; anchors.centerIn: parent } }
+            currentIndex: nav.currentIndex 
+
+            Home {}     // Index 0
+            Settings {} // Index 1
+            Config {}   // Index 2
         }
     }
 }

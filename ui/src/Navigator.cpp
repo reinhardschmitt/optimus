@@ -3,17 +3,26 @@
 namespace opt::ui {
 
 Navigator::Navigator(std::shared_ptr<opt::core::ICore> core, QObject *parent)
-    : QObject(parent), m_core(std::move(core)) // Dependency Injection des Cores
-      ,
-      m_currentPage(opt::ui::Page::Home) {}
+    : QObject(parent), m_core(std::move(core)), m_currentViewModel(nullptr) {}
 
-void Navigator::navigateTo(Page p) {
-  if (m_currentPage == p) {
-    return;
-  }
+IViewModel *Navigator::currentViewModel() const {
+  return m_currentViewModel.get();
+}
 
-  m_currentPage = p;
-  emit currentPageChanged();
+void Navigator::navigateToHome() {
+  auto homeModule = m_core->homeModule();
+  m_currentViewModel = nullptr;
+  emit currentViewModelChanged();
+}
+
+void Navigator::navigateToConfig() {
+  m_currentViewModel = nullptr;
+  emit currentViewModelChanged();
+}
+
+void Navigator::navigateToSettings() {
+  m_currentViewModel = nullptr;
+  emit currentViewModelChanged();
 }
 
 } // namespace opt::ui
