@@ -10,9 +10,9 @@ class SettingsModule : public ISettingsModule {
 public:
   explicit SettingsModule(std::shared_ptr<ICore> core);
 
-  std::string getData() const;
+  std::string getData() const override;
 
-  void setData(const std::string &data);
+  void setData(const std::string &data) override;
 
 private:
   std::shared_ptr<ICore> m_core;

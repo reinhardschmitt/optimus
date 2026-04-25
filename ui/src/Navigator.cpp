@@ -1,4 +1,7 @@
 #include "navigator.h"
+#include "detail/ConfigViewModel.h"
+#include "detail/HomeViewModel.h"
+#include "detail/SettingsViewModel.h"
 
 namespace opt::ui {
 
@@ -11,17 +14,20 @@ IViewModel *Navigator::currentViewModel() const {
 
 void Navigator::navigateToHome() {
   auto homeModule = m_core->homeModule();
-  m_currentViewModel = nullptr;
+  m_currentViewModel = std::make_unique<HomeViewModel>(homeModule, this);
   emit currentViewModelChanged();
 }
 
 void Navigator::navigateToConfig() {
-  m_currentViewModel = nullptr;
+  auto configModule = m_core->configModule();
+  m_currentViewModel = std::make_unique<ConfigViewModel>(configModule, this);
   emit currentViewModelChanged();
 }
 
 void Navigator::navigateToSettings() {
-  m_currentViewModel = nullptr;
+  auto settingsModule = m_core->settingsModule();
+  m_currentViewModel =
+      std::make_unique<SettingsViewModel>(settingsModule, this);
   emit currentViewModelChanged();
 }
 

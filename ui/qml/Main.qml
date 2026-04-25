@@ -22,15 +22,15 @@ ApplicationWindow {
                 anchors.fill: parent
                 Button { 
                     text: "Home"
-                    onClicked: nav.navigateTo(0) 
+                    onClicked: nav.navigateToHome() 
                 }
                 Button { 
                     text: "Settings"
-                    onClicked: nav.navigateTo(1) 
+                    onClicked: nav.navigateToSettings() 
                 }
                 Button { 
                     text: "Config"
-                    onClicked: nav.navigateTo(2) 
+                    onClicked: nav.navigateToConfig() 
                 }
             }
         }

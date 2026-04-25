@@ -18,6 +18,13 @@ qt_add_qml_module(ui
     SOURCES
         src/Navigator.cpp
         inc/Navigator.h
+        src/HomeViewModel.cpp
+        src/detail/HomeViewModel.h
+        src/SettingsViewModel.cpp
+        src/detail/SettingsViewModel.h
+        src/ConfigViewModel.cpp
+        src/detail/ConfigViewModel.h
+
 )
 
 target_link_libraries(ui PRIVATE core)
