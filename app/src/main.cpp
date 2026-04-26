@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
   QGuiApplication app(argc, argv);
 
   auto core{opt::core::createCore()};
-  opt::ui::Navigator navigator{core};
+  opt::ui::Navigator *navigator = new opt::ui::Navigator(core, &app);
 
   QQmlApplicationEngine engine;
   engine.addImportPath("qrc:/");
@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
       &engine, &QQmlApplicationEngine::objectCreationFailed, &app,
       []() { QCoreApplication::exit(-1); }, Qt::QueuedConnection);
 
-  engine.setInitialProperties({{"nav", QVariant::fromValue(&navigator)}});
+  engine.setInitialProperties({{"nav", QVariant::fromValue(navigator)}});
   engine.loadFromModule("optimus.ui", "Main");
 
   return app.exec();

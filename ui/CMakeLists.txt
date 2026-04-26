@@ -24,6 +24,8 @@ qt_add_qml_module(ui
         src/detail/SettingsViewModel.h
         src/ConfigViewModel.cpp
         src/detail/ConfigViewModel.h
+        inc/IViewModel.h
+        src/IViewModel.cpp
 
 )
 

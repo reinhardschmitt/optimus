@@ -2,6 +2,8 @@
 
 #include "ICoreModule.h"
 
+#include <string>
+
 namespace opt::core {
 
 class ISettingsModule : public ICoreModule {

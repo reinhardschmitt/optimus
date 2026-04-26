@@ -8,9 +8,10 @@
 
 namespace opt::ui {
 
-class HomeViewModel : public QObject, public IViewModel {
+class HomeViewModel : public IViewModel {
   Q_OBJECT
   QML_ELEMENT
+  QML_UNCREATABLE("ViewModels can only be created by the Navigator C++ backend")
   Q_PROPERTY(QString data READ data WRITE setData NOTIFY dataChanged)
 public:
   explicit HomeViewModel(std::shared_ptr<opt::core::IHomeModule> module,

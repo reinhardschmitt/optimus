@@ -4,7 +4,7 @@ namespace opt::ui {
 
 HomeViewModel::HomeViewModel(std::shared_ptr<opt::core::IHomeModule> module,
                              QObject *parent)
-    : QObject(parent), m_module(module) {}
+    : m_module(module) {}
 
 QString HomeViewModel::data() const {
   return QString::fromStdString(m_module->getData());

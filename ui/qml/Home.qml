@@ -1,11 +1,35 @@
 import QtQuick
 import QtQuick.Controls
+import optimus.ui
 
 Rectangle {
-    color: "#f0f0f0"
-    Text {
-        text: "🏠 Home View"
+    color: "#e0e0e0"
+    anchors.fill: parent
+
+    property HomeViewModel viewModel
+
+    Column {
         anchors.centerIn: parent
-        font.pixelSize: 24
+        spacing: 16
+
+        Text {
+            text: "🏠 Home View"
+            font.pixelSize: 24
+        }
+
+        TextField {
+            id: inputField
+            width: 200
+        }
+
+        Button {
+            text: "Set"
+            onClicked: if (viewModel) viewModel.data = inputField.text
+        }
+
+        Text {
+            text: viewModel ? viewModel.data : ""
+            font.pixelSize: 24
+        }
     }
 }

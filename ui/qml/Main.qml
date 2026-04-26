@@ -36,15 +36,18 @@ ApplicationWindow {
         }
 
         // Der View-Container
-        StackLayout {
+        Loader {
+            id: pageLoader
             Layout.fillWidth: true
             Layout.fillHeight: true
-            
-            currentIndex: nav.currentIndex 
+            source: nav.currentQml
 
-            Home {}     // Index 0
-            Settings {} // Index 1
-            Config {}   // Index 2
+            Binding {
+                target: pageLoader.item
+                property: "viewModel"
+                value: nav.currentViewModel
+                when: pageLoader.status === Loader.Ready
+            }
         }
     }
 }
