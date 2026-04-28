@@ -6,42 +6,32 @@
 namespace opt::ui {
 
 Navigator::Navigator(std::shared_ptr<opt::core::ICore> core, QObject *parent)
-    : QObject(parent), m_core(std::move(core)) {
-  navigateToHome();
+    : QObject(parent), m_core(std::move(core)) {}
+
+IViewModel *Navigator::currentViewModel() const {
+  return m_page.viewModel.get();
 }
 
-IViewModel *Navigator::currentViewModel() const { return m_currentViewModel; }
+QString Navigator::currentQml() const { return m_page.qml; }
 
-QString Navigator::currentQml() const { return m_currentQml; }
+void Navigator::initialize() { navigateToHome(); }
 
 void Navigator::navigateToHome() {
-  auto homeModule = m_core->homeModule();
-
-  m_currentViewModel = new HomeViewModel(homeModule, this);
-  emit currentViewModelChanged();
-
-  m_currentQml = "Home.qml";
-  emit currentQmlChanged();
+  m_page.change(std::make_unique<HomeViewModel>(m_core->homeModule()),
+                "Home.qml");
+  emit currentPageChanged();
 }
 
 void Navigator::navigateToConfig() {
-  auto configModule = m_core->configModule();
-
-  m_currentViewModel = new ConfigViewModel(configModule, this);
-  emit currentViewModelChanged();
-
-  m_currentQml = "Config.qml";
-  emit currentQmlChanged();
+  m_page.change(std::make_unique<ConfigViewModel>(m_core->configModule()),
+                "Config.qml");
+  emit currentPageChanged();
 }
 
 void Navigator::navigateToSettings() {
-  auto settingsModule = m_core->settingsModule();
-
-  m_currentViewModel = new SettingsViewModel(settingsModule, this);
-  emit currentViewModelChanged();
-
-  m_currentQml = "Settings.qml";
-  emit currentQmlChanged();
+  m_page.change(std::make_unique<SettingsViewModel>(m_core->settingsModule()),
+                "Settings.qml");
+  emit currentPageChanged();
 }
 
 } // namespace opt::ui

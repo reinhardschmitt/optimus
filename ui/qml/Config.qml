@@ -6,7 +6,7 @@ Rectangle {
     color: "#e0e0e0"
     anchors.fill: parent
 
-    property ConfigViewModel viewModel
+    required property ConfigViewModel viewModel
 
     Column {
         anchors.centerIn: parent

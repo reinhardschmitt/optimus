@@ -35,18 +35,19 @@ ApplicationWindow {
             }
         }
 
-        // Der View-Container
+        Component.onCompleted: {
+            nav.initialize()
+        }
+
         Loader {
             id: pageLoader
             Layout.fillWidth: true
             Layout.fillHeight: true
-            source: nav.currentQml
-
-            Binding {
-                target: pageLoader.item
-                property: "viewModel"
-                value: nav.currentViewModel
-                when: pageLoader.status === Loader.Ready
+            Connections {
+                target: nav
+                function onCurrentPageChanged() {
+                    pageLoader.setSource(nav.currentQml, { "viewModel": nav.currentViewModel });
+                }
             }
         }
     }

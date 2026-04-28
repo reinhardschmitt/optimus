@@ -14,8 +14,8 @@ class Navigator : public QObject {
   QML_UNCREATABLE("Create in C++")
 
   Q_PROPERTY(IViewModel *currentViewModel READ currentViewModel NOTIFY
-                 currentViewModelChanged)
-  Q_PROPERTY(QString currentQml READ currentQml NOTIFY currentQmlChanged)
+                 currentPageChanged)
+  Q_PROPERTY(QString currentQml READ currentQml NOTIFY currentPageChanged)
 
 public:
   explicit Navigator(std::shared_ptr<opt::core::ICore> core,
@@ -23,18 +23,25 @@ public:
 
   IViewModel *currentViewModel() const;
   QString currentQml() const;
+  Q_INVOKABLE void initialize();
   Q_INVOKABLE void navigateToHome();
   Q_INVOKABLE void navigateToConfig();
   Q_INVOKABLE void navigateToSettings();
 
 signals:
-  void currentViewModelChanged();
-  void currentQmlChanged();
+  void currentPageChanged();
 
 private:
-  std::shared_ptr<opt::core::ICore> m_core;
-  IViewModel *m_currentViewModel;
-  QString m_currentQml;
-};
+  struct Page {
+    std::unique_ptr<IViewModel> viewModel = nullptr;
+    QString qml;
+    void change(std::unique_ptr<IViewModel> newViewModel,
+                const QString &newQml) {
+      viewModel = std::move(newViewModel);
+      qml = newQml;
+    }
+  } m_page;
 
+  std::shared_ptr<opt::core::ICore> m_core;
+};
 }; // namespace opt::ui
