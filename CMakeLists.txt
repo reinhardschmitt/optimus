@@ -12,3 +12,5 @@ qt_standard_project_setup()
 add_subdirectory(core)
 add_subdirectory(ui)
 add_subdirectory(app)
+
+enable_testing()

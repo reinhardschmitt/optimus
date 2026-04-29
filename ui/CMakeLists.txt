@@ -26,7 +26,9 @@ qt_add_qml_module(ui
         src/detail/ConfigViewModel.h
         inc/IViewModel.h
         src/IViewModel.cpp
-
 )
 
 target_link_libraries(ui PRIVATE core)
+
+add_subdirectory(tst/ui)
+add_subdirectory(tst/modelview)

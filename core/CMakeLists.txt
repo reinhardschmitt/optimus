@@ -15,3 +15,5 @@ target_sources(core
         src/SettingsModule.cpp
         src/ConfigModule.cpp
 )
+
+add_subdirectory(tst)
