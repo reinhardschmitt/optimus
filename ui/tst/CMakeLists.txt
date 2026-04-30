@@ -18,8 +18,5 @@ target_include_directories(testcore
 
 target_link_libraries(testcore gtest_main gmock_main)
 
-add_test(
-    NAME CoreUnitTests 
-    COMMAND testcore 
-    WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
-)
+include(GoogleTest)
+gtest_discover_tests(testcore)

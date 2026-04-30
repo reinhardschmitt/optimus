@@ -17,8 +17,9 @@ FetchContent_MakeAvailable(googletest)
 
 qt_standard_project_setup()
 
+include(CTest)
+enable_testing()
+
 add_subdirectory(core)
 add_subdirectory(ui)
 add_subdirectory(app)
-
-enable_testing()
