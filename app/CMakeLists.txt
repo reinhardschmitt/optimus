@@ -1,5 +1,3 @@
-# app/CMakeLists.txt
-
 qt_add_executable(optimus src/main.cpp)
 
 target_link_libraries(optimus 

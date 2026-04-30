@@ -1,13 +1,4 @@
-# GoogleTest for core unit tests
-include(FetchContent)
-FetchContent_Declare(
-    googletest
-    URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
-)
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
-
-add_executable(coreTests
+add_executable(testcore
     TestSample.cpp
     ../src/Core.cpp
     ../src/CoreFactory.cpp
@@ -16,12 +7,12 @@ add_executable(coreTests
     ../src/ConfigModule.cpp
 )
 
-target_include_directories(coreTests 
+target_include_directories(testcore 
     PRIVATE 
         ../inc
         ../src/detail
 )
 
-target_link_libraries(coreTests gtest_main)
+target_link_libraries(testcore gtest_main)
 
-add_test(NAME coreTests COMMAND coreTests)
+add_test(NAME testcore COMMAND testcore)

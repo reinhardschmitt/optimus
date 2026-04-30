@@ -30,5 +30,5 @@ qt_add_qml_module(ui
 
 target_link_libraries(ui PRIVATE core)
 
-add_subdirectory(tst/ui)
-add_subdirectory(tst/modelview)
+add_subdirectory(tst/qml)
+add_subdirectory(tst/viewmodel)
