@@ -1,15 +1,15 @@
 #include "ICore.h"
+#include "IEnvironment.h"
+#include "ILogger.h"
 
 #include <memory>
 
 namespace opt::core {
 
-std::shared_ptr<ICore> createCore();
+std::shared_ptr<ICore> createCore(std::shared_ptr<IEnvironment> env);
 
-std::unique_ptr<IHomeModule> createHomeModule();
+std::shared_ptr<IEnvironment> createEnvironment(std::shared_ptr<ILogger> log);
 
-std::unique_ptr<IConfigModule> createConfigModule();
+std::shared_ptr<ILogger> createLogger();
 
-std::unique_ptr<ISettingsModule> createSettingsModule();
-
-}
+} // namespace opt::core

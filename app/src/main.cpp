@@ -7,7 +7,10 @@
 int main(int argc, char *argv[]) {
   QGuiApplication app(argc, argv);
 
-  auto core{opt::core::createCore()};
+  auto logger{opt::core::createLogger()};
+  auto env{opt::core::createEnvironment(logger)};
+  auto core{opt::core::createCore(env)};
+
   opt::ui::Navigator *navigator = new opt::ui::Navigator(core, &app);
 
   QQmlApplicationEngine engine;

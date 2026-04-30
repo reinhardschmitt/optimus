@@ -2,8 +2,8 @@
 
 namespace opt::core {
 
-ConfigModule::ConfigModule(std::shared_ptr<ICore> core)
-    : m_core(std::move(core)), m_data("Config") {}
+ConfigModule::ConfigModule(std::shared_ptr<IEnvironment> env)
+    : m_env(env), m_data("Config") {}
 
 std::string ConfigModule::getData() const { return m_data; }
 

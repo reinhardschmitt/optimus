@@ -1,18 +1,21 @@
 add_executable(testcore
-    TestSample.cpp
+    TestHomeModel.cpp
     ../src/Core.cpp
     ../src/CoreFactory.cpp
     ../src/HomeModule.cpp
     ../src/SettingsModule.cpp
     ../src/ConfigModule.cpp
+    ../src/Logger.cpp
+    ../src/Environment.cpp
 )
 
 target_include_directories(testcore 
-    PRIVATE 
+    PRIVATE
+        .
         ../inc
         ../src/detail
 )
 
-target_link_libraries(testcore gtest_main)
+target_link_libraries(testcore gtest_main gmock_main)
 
 add_test(NAME testcore COMMAND testcore)

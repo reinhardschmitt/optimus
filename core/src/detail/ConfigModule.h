@@ -1,5 +1,5 @@
 #include "IConfigModule.h"
-#include "ICore.h"
+#include "IEnvironment.h"
 
 #include <memory>
 #include <string>
@@ -8,14 +8,14 @@ namespace opt::core {
 
 class ConfigModule : public IConfigModule {
 public:
-  explicit ConfigModule(std::shared_ptr<ICore> core);
+  explicit ConfigModule(std::shared_ptr<IEnvironment> env);
 
   std::string getData() const override;
 
   void setData(const std::string &data) override;
 
 private:
-  std::shared_ptr<ICore> m_core;
+  std::shared_ptr<IEnvironment> m_env;
   std::string m_data;
 };
 
