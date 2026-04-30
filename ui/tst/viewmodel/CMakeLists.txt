@@ -4,4 +4,8 @@ add_executable(testviewmodel
 
 target_link_libraries(testviewmodel PRIVATE Qt6::Test core)
 
-add_test(NAME testviewmodel COMMAND testviewmodel)
+add_test(
+    NAME ViewModelUnitTests 
+    COMMAND testviewmodel 
+    WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+)
