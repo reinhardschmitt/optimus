@@ -16,6 +16,7 @@ target_sources(core
         src/ConfigModule.cpp
         src/Logger.cpp
         src/Environment.cpp
+        src/Parameter.cpp
 )
 
 add_subdirectory(tst)

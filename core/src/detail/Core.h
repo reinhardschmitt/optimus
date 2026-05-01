@@ -3,6 +3,7 @@
 #include "ICore.h"
 #include "ICoreModule.h"
 #include "IEnvironment.h"
+#include "Parameter.h"
 #include "SettingsModule.h"
 
 namespace opt::core {
@@ -19,6 +20,7 @@ public:
 
 private:
   std::shared_ptr<IEnvironment> m_env;
+  std::vector<Parameter> m_parameters;
 
   std::shared_ptr<HomeModule> m_homeModule;
   std::shared_ptr<ConfigModule> m_configModule;
