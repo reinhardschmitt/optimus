@@ -1,45 +1,31 @@
 import QtQuick
 import QtTest
-import "../../qml"
+import optimus.ui 1.0
 
 TestCase {
-    name: "HomeViewTests"
+    name: "HomeTest"
     when: windowShown
+    width: 200; height: 200
 
-    // --- MOCK VIEWMODEL ---
-    // Wir erstellen ein einfaches Objekt, das die 'data' Property besitzt
-    QtObject {
-        id: mockViewModel
-        property string data: "Initial Mock Data"
-    }
+    property QtObject mockVM: QtObject { property string data: "" }
 
-    // --- COMPONENT UNDER TEST ---
-    Home {
-        id: homeView
-        anchors.fill: parent
-        // Hier wird der Mock als ViewModel injiziert
-        viewModel: mockViewModel 
-    }
+    function test_click_updates_mock() {
+        let view = Qt.createComponent("qrc:/qt/qml/optimus/ui/qml/Home.qml")
+                     .createObject(parent, {viewModel: mockVM})
+        
+        let input = findChild(view, "inputField")
+        let button = findChild(view, "setButton")
 
-    // --- TESTS ---
-    function test_initial_display() {
-        // Prüfe, ob der Text aus dem Mock korrekt angezeigt wird
-        // Wir suchen das Text-Element (evtl. über objectName oder Index)
-        let textElement = findChild(homeView, "") // Falls kein objectName vergeben ist
-        // In deinem Fall am besten direkt vergleichen:
-        compare(homeView.viewModel.data, "Initial Mock Data", "Mock-Daten sollten geladen sein")
-    }
-
-    function test_set_button_updates_mock() {
-        // 1. Finde das TextField und setze Text
-        let input = findChild(homeView, "inputField") // ID 'inputField' in Home.qml nutzen
-        input.text = "New Data from Test"
-
-        // 2. Finde den Button und klicke ihn
-        let button = findChild(homeView, "setButton") // Füge id: setButton in Home.qml hinzu
+        input.text = "Success"
         mouseClick(button)
 
-        // 3. Verifiziere, ob das Mock-ViewModel aktualisiert wurde
-        compare(mockViewModel.data, "New Data from Test", "ViewModel sollte durch Klick aktualisiert werden")
+        compare(mockVM.data, "Success")
+
+        view.destroy()
+    }
+
+    function cleanupTestCase() {
+        // Hält das Fenster nach allen Tests offen
+        wait(1000000)
     }
 }

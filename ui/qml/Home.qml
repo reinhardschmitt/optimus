@@ -6,7 +6,7 @@ Rectangle {
     color: "#e0e0e0"
     anchors.fill: parent
 
-    required property HomeViewModel viewModel
+    required property var viewModel
 
     Column {
         anchors.centerIn: parent
@@ -19,10 +19,13 @@ Rectangle {
 
         TextField {
             id: inputField
+            objectName: "inputField"
             width: 200
         }
 
         Button {
+            id: setButton
+            objectName: "setButton"
             text: "Set"
             onClicked: if (viewModel) viewModel.data = inputField.text
         }

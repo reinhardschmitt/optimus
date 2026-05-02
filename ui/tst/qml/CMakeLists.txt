@@ -1,14 +1,17 @@
-add_executable(testui
+qt_add_executable(testui
     TestUi.cpp
-    TestUi.qml
 )
 
-target_link_libraries(testui PRIVATE Qt6::QuickTest Qt6::Quick core)
-
-add_test(
-    NAME ViewUnitTests 
-    COMMAND testui 
-    WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+qt_add_qml_module(testui
+    URI "test.module"
+    VERSION 1.0
+    QML_FILES
+        TestUi.qml
 )
 
-configure_file(TestUi.qml tst_TestUi.qml COPYONLY)
+target_link_libraries(testui PRIVATE 
+    Qt6::Quick 
+    Qt6::QuickTest 
+    ui
+    uiplugin
+)
