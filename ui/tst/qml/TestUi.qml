@@ -23,9 +23,4 @@ TestCase {
 
         view.destroy()
     }
-
-    function cleanupTestCase() {
-        // Hält das Fenster nach allen Tests offen
-        wait(1000000)
-    }
 }

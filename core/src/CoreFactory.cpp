@@ -2,11 +2,13 @@
 #include "detail/Core.h"
 #include "detail/Environment.h"
 #include "detail/Logger.h"
+#include "detail/ParameterService.h"
 
 namespace opt::core {
 
 std::shared_ptr<ICore> createCore(std::shared_ptr<IEnvironment> env) {
-  auto core = std::make_unique<Core>(env);
+  auto parameterService = std::make_shared<ParameterService>();
+  auto core = std::make_unique<Core>(env, parameterService);
   return core;
 };
 

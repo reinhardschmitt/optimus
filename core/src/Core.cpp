@@ -1,13 +1,13 @@
 #include "detail/Core.h"
-#include "detail/Parameter.h"
+#include "detail/ParameterService.h"
 
 #include <memory>
 
 namespace opt::core {
 
-Core::Core(std::shared_ptr<IEnvironment> env) : m_env(env) {
-  m_parameters = parameterMapFactory();
-}
+Core::Core(std::shared_ptr<IEnvironment> env,
+           std::shared_ptr<IParameterService> parameterService)
+    : m_env(env), m_parameterService(parameterService) {}
 
 std::string Core::version() const { return "1.0.0"; }
 
